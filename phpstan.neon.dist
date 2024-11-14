@@ -1,7 +1,11 @@
 includes:
     - vendor/larastan/larastan/extension.neon
+    - vendor/tomasvotruba/bladestan/config/extension.neon
 
 parameters:
+    bladestan:
+        template_paths:
+            - resources/views
 
     paths:
         - app/
