@@ -8,6 +8,7 @@
         "laravel/fortify": "^1.24",
         "laravel/framework": "^11.9",
         "laravel/prompts": "^0.3.2",
+        "laravel/pulse": "^1.2",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "livewire/volt": "^1.6",
