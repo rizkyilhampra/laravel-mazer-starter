@@ -1,0 +1,2 @@
+./vendor/bin/phpstan analyse --memory-limit=1G --error-format=blade
+./vendor/bin/pest --parallel
