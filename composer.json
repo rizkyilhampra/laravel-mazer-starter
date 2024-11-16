@@ -63,7 +63,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,logs,vite"
+            "./vendor/bin/sail up -d && bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185\" \"./vendor/bin/sail logs --follow\" \"./vendor/bin/sail artisan pail --timeout=0\" \"./vendor/bin/sail bun run dev\" --names=server,logs,vite --teardown \"./vendor/bin/sail down\""
         ]
     },
     "extra": {
