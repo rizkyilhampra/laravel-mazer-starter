@@ -40,7 +40,7 @@ log() {
     esac
 }
 
-find_available_port() {
+check_docker_port() {
     local default_port=$1
     local port_name=$2
 
@@ -118,8 +118,8 @@ main() {
     touch database/database.sqlite
 
     if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
-        find_available_port 80 "APP_PORT"
-        find_available_port 5173 "VITE_PORT"
+        check_docker_port 80 "APP_PORT"
+        check_docker_port 5173 "VITE_PORT"
 
         ./vendor/bin/sail up -d
         ./vendor/bin/sail artisan migrate --seed --graceful --ansi
