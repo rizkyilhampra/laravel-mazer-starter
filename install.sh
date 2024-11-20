@@ -43,14 +43,13 @@ log() {
 }
 
 find_available_port() {
-    local start_port=$1
-    local end_port=$2
-    local port_name=$3
+    local default_port=$1
+    local port_name=$2
 
-    if ! docker container ls --format '{{.Ports}}' | $search_cmd "(0.0.0.0:|:::)${start_port}->"; then
+    if ! docker container ls --format '{{.Ports}}' | grep -E "(0.0.0.0:|:::)${default_port}->"; then
         local port_found=false
-        for port in $(seq "$((start_port + 1))" "$end_port"); do
-            if ! docker container ls --format '{{.Ports}}' | $search_cmd "(0.0.0.0:|:::)${port}->"; then
+        for port in $(seq "$((default_port + 1))" "$((default_port + 10))"); do
+            if ! docker container ls --format '{{.Ports}}' | grep -E "(0.0.0.0:|:::)80->"; then
                 echo "${port_name}=$port" >>.env
                 port_found=true
                 break
@@ -58,7 +57,7 @@ find_available_port() {
         done
 
         if ! $port_found; then
-            log error "Failed to find an available port for ${port_name} (tried ports ${start_port+1}-${end_port})"
+            log error "Failed to find an available port for ${port_name} (tried ports ${default_port+1}-${default_port+10})"
         fi
     fi
 }
@@ -124,9 +123,8 @@ main() {
     git commit -m "init"
 
     if command -v docker >/dev/null 2>&1; then
-        search_cmd=$(command -v rg >/dev/null 2>&1 && echo "rg -e" || echo "grep -E")
-        find_available_port 81 90 "APP_PORT"
-        find_available_port 5174 5183 "VITE_PORT"
+        find_available_port 80 "APP_PORT"
+        find_available_port 5173 "VITE_PORT"
     else
         log error "Docker is not installed. You need to run the development server manually."
     fi
