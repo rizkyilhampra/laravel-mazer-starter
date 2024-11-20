@@ -1,2 +1,2 @@
 ./vendor/bin/phplint
-./vendor/bin/pint --dirty -v
+./vendor/bin/pint --dirty --repair -v
