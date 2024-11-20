@@ -98,6 +98,9 @@ main() {
     if [ -d "$project_name" ]; then
         log error "Directory '$project_name' already exists"
     fi
+
+    log info "\nGet your coffee, this will take a while...\n"
+
     git clone --depth 1 "$REPO_URL" "$project_name"
     cd "$project_name"
 
@@ -114,7 +117,6 @@ main() {
     fi
 
     touch database/database.sqlite
-    php artisan migrate --seed
 
     rm -rf .git
     rm install.sh
@@ -125,8 +127,8 @@ main() {
     if command -v docker >/dev/null 2>&1; then
         find_available_port 80 "APP_PORT"
         find_available_port 5173 "VITE_PORT"
-    else
-        log error "Docker is not installed. You need to run the development server manually."
+
+        ./vendor/bin/sail up -d
     fi
 
     if ! command -v tmux >/dev/null 2>&1; then
@@ -138,7 +140,7 @@ main() {
         return
     fi
     tmux new-session -d -s "${project_name}"
-    tmux new-window -t "${project_name}" -n "server" "composer run dev"
+    tmux new-window -t "${project_name}" -n "server" "./vendor/bin/sail artisan migrate --seed --graceful --ansi && composer run dev"
     tmux attach-session -t "${project_name}"
 }
 
