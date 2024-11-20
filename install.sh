@@ -123,8 +123,10 @@ main() {
 
         ./vendor/bin/sail up -d
         ./vendor/bin/sail artisan migrate --seed --graceful --ansi
+        ./vendor/bin/sail artisan ide-helper:generate
     else
         php artisan migrate --seed --graceful --ansi
+        php artisan ide-helper:generate
     fi
 
     if ! command -v tmux >/dev/null 2>&1; then
