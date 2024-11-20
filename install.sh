@@ -104,14 +104,19 @@ main() {
 
     if command -v docker >/dev/null 2>&1; then
         search_cmd=$(command -v rg || grep)
+        port_found=false
+
         for port in {80..90}; do
             if ! docker container ls --format '{{.Ports}}' | $search_cmd -q "$port"; then
                 echo "APP_PORT=$port" >>.env
+                port_found=true
                 break
-            else
-                log error "All ports from 80 to 90 are in use. Please free up some ports."
             fi
         done
+
+        if ! $port_found; then
+            log error "Failed to find an available port for the app"
+        fi
     else
         log error "Docker is not installed. You need to run the development server manually."
     fi
