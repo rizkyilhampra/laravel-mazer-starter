@@ -110,12 +110,12 @@ main() {
 
     rm -rf .git
     rm install.sh
+
     git init
+    git add .
+    git commit -m "init" -n
 
     $(command -v bun || command -v npm) run prepare
-
-    git add .
-    git commit -m "init"
 
     if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
         find_available_port 80 "APP_PORT"
