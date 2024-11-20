@@ -112,7 +112,7 @@ main() {
     rm install.sh
     git init
 
-    $(command -v bunx || command -v npx) husky init
+    $(command -v bun || command -v npm) run prepare
 
     git add .
     git commit -m "init"
