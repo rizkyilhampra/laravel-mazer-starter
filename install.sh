@@ -106,8 +106,6 @@ main() {
 
     $(command -v bun || command -v npm) install
 
-    touch database/database.sqlite
-
     rm -rf .git
     rm install.sh
 
@@ -117,11 +115,16 @@ main() {
 
     $(command -v bun || command -v npm) run prepare
 
+    touch database/database.sqlite
+
     if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
         find_available_port 80 "APP_PORT"
         find_available_port 5173 "VITE_PORT"
 
         ./vendor/bin/sail up -d
+        ./vendor/bin/sail artisan migrate --seed --graceful --ansi
+    else
+        php artisan migrate --seed --graceful --ansi
     fi
 
     if ! command -v tmux >/dev/null 2>&1; then
@@ -133,7 +136,7 @@ main() {
         return
     fi
     tmux new-session -d -s "${project_name}"
-    tmux new-window -t "${project_name}" -n "server" "./vendor/bin/sail artisan migrate --seed --graceful --ansi && composer run dev"
+    tmux new-window -t "${project_name}" -n "server" "composer run dev"
     tmux attach-session -t "${project_name}"
 }
 
