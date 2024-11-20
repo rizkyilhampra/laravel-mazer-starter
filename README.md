@@ -19,7 +19,11 @@ An Laravel starter kits with [Mazer](https://github.com/zuramai/mazer) as an adm
 -   etc (will be updated)
 
 ## Installation
+> [!NOTE]
+> It just one line command, you can copy paste it to your terminal, get a cup of coffee, and wait until it's done.
 
-> I'm going to make an shell script and then artisan command to provide best installation experience. The idea will be run through `curl` command as the first step.
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/rizkyilhampra/laravel-mazer-starter/refs/heads/main/install.sh)
+```
 
 ## Another Section Will be Updated
