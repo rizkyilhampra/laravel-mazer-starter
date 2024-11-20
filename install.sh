@@ -99,8 +99,6 @@ main() {
         log error "Directory '$project_name' already exists"
     fi
 
-    log info "\nGet your coffee, this will take a while...\n"
-
     git clone --depth 1 "$REPO_URL" "$project_name"
     cd "$project_name"
 
@@ -124,7 +122,7 @@ main() {
     git add .
     git commit -m "init"
 
-    if command -v docker >/dev/null 2>&1; then
+    if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
         find_available_port 80 "APP_PORT"
         find_available_port 5173 "VITE_PORT"
 

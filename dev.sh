@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-check_docker() {
-    command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null
-}
-
-if check_docker; then
+if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
     ./vendor/bin/sail ps | grep -q 'Up' || ./vendor/bin/sail up -d
 
     bunx concurrently \
