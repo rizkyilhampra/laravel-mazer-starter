@@ -104,8 +104,6 @@ main() {
     cp .env.example .env
     php artisan key:generate
 
-    $(command -v bun || command -v npm) install
-
     rm -rf .git
     rm install.sh
 
@@ -113,7 +111,7 @@ main() {
     git add .
     git commit -m "init" -n
 
-    $(command -v bun || command -v npm) run prepare
+    $(command -v bun || command -v npm) install
 
     touch database/database.sqlite
 
