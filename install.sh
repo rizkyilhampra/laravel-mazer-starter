@@ -102,6 +102,20 @@ main() {
     git add .
     git commit -m "init"
 
+    if command -v docker >/dev/null 2>&1; then
+        search_cmd=$(command -v rg || grep)
+        for port in {80..90}; do
+            if ! docker container ls --format '{{.Ports}}' | $search_cmd -q "$port"; then
+                echo "APP_PORT=$port" >>.env
+                break
+            else
+                log error "All ports from 80 to 90 are in use. Please free up some ports."
+            fi
+        done
+    else
+        log error "Docker is not installed. You need to run the development server manually."
+    fi
+
     if ! command -v tmux >/dev/null 2>&1; then
         log warning "tmux is not installed. You need to run the development server manually."
         echo -e "\n${COLORS[bold]}Next steps:${COLORS[reset]}"
