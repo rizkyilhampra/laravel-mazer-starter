@@ -104,19 +104,16 @@ main() {
     cp .env.example .env
     php artisan key:generate
 
-    if command -v bun >/dev/null 2>&1; then
-        bun install
-        bunx husky init
-    else
-        npm install
-        npx husky init
-    fi
+    $(command -v bun || command -v npm) install
 
     touch database/database.sqlite
 
     rm -rf .git
     rm install.sh
     git init
+
+    $(command -v bunx || command -v npx) husky init
+
     git add .
     git commit -m "init"
 
