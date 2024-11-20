@@ -3,9 +3,7 @@ set -euo pipefail
 
 readonly REPO_URL="https://github.com/rizkyilhampra/laravel-mazer-starter"
 readonly REQUIRED_PHP_VERSION="8.2"
-readonly PACKAGE_MANAGER="npm"
-readonly PREFERED_PACKAGE_MANAGER="bun"
-readonly REQUIRED_DEPS=("git" "composer" "php" "unzip" "$PACKAGE_MANAGER")
+readonly REQUIRED_DEPS=("git" "composer" "php" "unzip" "npm")
 
 declare -A COLORS
 if [[ -t 1 ]]; then
@@ -106,11 +104,11 @@ main() {
     cp .env.example .env
     php artisan key:generate
 
-    $(command -v $PREFERED_PACKAGE_MANAGER || command -v $PACKAGE_MANAGER) install
-
     if command -v bun >/dev/null 2>&1; then
+        bun install
         bunx husky init
     else
+        npm install
         npx husky init
     fi
 
