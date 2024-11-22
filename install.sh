@@ -106,12 +106,14 @@ main() {
 
     rm -rf .git
     rm install.sh
+    truncate -s 0 README.md
 
     git init
-    git add .
-    git commit -m "init" -n
 
-    $(command -v bun || command -v npm) install
+    $(command -v bun || npm) install
+
+    git add .
+    git commit -m "init"
 
     touch database/database.sqlite
 
