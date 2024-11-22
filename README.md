@@ -8,15 +8,16 @@ An Laravel starter kits with [Mazer](https://github.com/zuramai/mazer) as an adm
 > I try to ensure the Laravel version and it's php dependencies are up to date all the time
 
 -   Laravel 11.33
--   Vite
+-   Vite (Hope [farmfe](https://farmfe.com) will be supported soon)
 -   Bootstrap through SAAS
 -   Livewire Volt Alpine.js
 -   Git Hooks for Linting, Formatting, and Testing with Husky
     - Syntax check through [phplint](https://github.com/overtrue/phplint/)
     - Code styles and standard through [pint](https://github.com/laravel/pint)
-    - Code quality check through [phpstan](https://github.com/phpstan/phpstan)
+    - Code quality check through [phpstan](https://github.com/phpstan/phpstan) and [bladestan](https://github.com/TomasVotruba/bladestan) (default: 5)
     - Testing through [pest](https://pestphp.com)
--   Docker through Sail
+-   Docker through Sail (Optional by checking your system has docker or not)
+-   Bun as package manager by default. See [lockfile](./bun.lockb)
 
 ## Why?
 
