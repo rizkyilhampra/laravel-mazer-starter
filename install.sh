@@ -134,6 +134,12 @@ main() {
 
     tmux new-session -d -s "${project_name}"
     tmux new-window -t "${project_name}" -n "server" "composer run dev"
+
+    if [[ -n "${TMUX:-}" ]]; then
+        tmux switch-client -t "${project_name}"
+        return
+    fi
+
     tmux attach-session -t "${project_name}"
 }
 
