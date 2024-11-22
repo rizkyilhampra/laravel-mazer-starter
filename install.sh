@@ -129,12 +129,9 @@ main() {
 
     if ! command -v tmux >/dev/null 2>&1; then
         log warning "tmux is not installed. You need to run the development server manually."
-        echo -e "\n${COLORS[bold]}Next steps:${COLORS[reset]}"
-        echo -e "${COLORS[dim]}1. Configure your .env file${COLORS[reset]}"
-        echo -e "${COLORS[dim]}2. Run 'composer run dev' to start the development server${COLORS[reset]}"
-        echo -e "${COLORS[dim]}3. Visit http://localhost:8000 in your browser${COLORS[reset]}"
         return
     fi
+
     tmux new-session -d -s "${project_name}"
     tmux new-window -t "${project_name}" -n "server" "composer run dev"
     tmux attach-session -t "${project_name}"
