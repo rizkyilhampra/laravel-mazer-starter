@@ -22,11 +22,9 @@
           <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="user-menu d-flex">
               <div class="user-name text-end me-3">
-                <h6 class="mb-0 text-gray-600">{{ auth()->check() ? auth()->user()->name : 'Guest' }}</h6>
+                <h6 class="mb-0 text-gray-600">{{ $userName }}</h6>
                 <p class="mb-0 text-sm text-gray-600">
-                  {{ \App\Enums\RoleEnum::getLabel(
-                     auth('web')->user()->roles->first()->name
-                  ) }}
+                  {{ $userRole }}
                 </p>
               </div>
               <div class="user-img d-flex align-items-center">
@@ -43,18 +41,18 @@
             aria-labelledby="dropdownMenuButton"
             style="min-width: 11rem"
           >
-          {{--
-            <li>
+            {{--
+              <li>
               <a
-                class="dropdown-item"
-                wire:navigate
-                href="{{ route('profile.index') }}"
+              class="dropdown-item"
+              wire:navigate
+              href="{{ route('profile.index') }}"
               >
-                <i class="icon-mid bi bi-person me-2"></i>
-                Profil
+              <i class="icon-mid bi bi-person me-2"></i>
+              Profil
               </a>
-            </li>
-          --}}
+              </li>
+            --}}
             <li>
               <form
                 class="hidden"

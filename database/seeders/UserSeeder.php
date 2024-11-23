@@ -8,9 +8,6 @@ use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $user = new \App\Models\User;
@@ -23,6 +20,8 @@ class UserSeeder extends Seeder
         ]);
 
         $role = app(Role::class)->findByName(RoleEnum::ADMIN->value);
+
+        /** @var \App\Models\User $admin */
         $admin->assignRole($role);
     }
 }

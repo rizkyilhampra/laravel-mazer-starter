@@ -3,7 +3,7 @@
     <div class="sidebar-header position-relative">
       <div class="d-flex justify-content-between align-items-center">
         <div class="logo w-100">
-          <a href="/" class="fw-bolder">{{ config('app.name') }}</a>
+          <a href="/" class="fw-bolder">{{ $appName }}</a>
         </div>
         <div class="sidebar-toggler x">
           <a href="#" class="sidebar-hide d-xl-none d-block">
