@@ -1,2 +1,7 @@
-./vendor/bin/phpstan analyse --memory-limit=1G --error-format=blade
-./vendor/bin/pest --parallel
+if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
+    ./vendor/bin/sail bin phpstan analyse --memory-limit=1G --error-format=blade --ansi
+    ./vendor/bin/sail pest --parallel --ansi
+else
+    ./vendor/bin/phpstan analyse --memory-limit=1G --error-format=blade --ansi
+    ./vendor/bin/pest --parallel --ansi
+fi

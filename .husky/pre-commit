@@ -1,2 +1,7 @@
-./vendor/bin/phplint
-./vendor/bin/pint --dirty --repair -v
+if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
+    ./vendor/bin/sail bin phplint --ansi
+    ./vendor/bin/sail pint --dirty --repair -v --ansi
+else
+    ./vendor/bin/phplint --ansi
+    ./vendor/bin/pint --dirty --repair -v --ansi
+fi
