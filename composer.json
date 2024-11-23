@@ -65,6 +65,14 @@
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "./dev.sh"
+        ],
+        "test:arch": "pest --filter=arch",
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:coverage": "pest --parallel --coverage --min=100",
+        "test": [
+            "@test:arch",
+            "@test:type-coverage",
+            "@test:coverage"
         ]
     },
     "extra": {
