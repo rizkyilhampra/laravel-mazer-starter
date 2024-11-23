@@ -9,6 +9,8 @@ parameters:
     bladestan:
         template_paths:
             - resources/views
+    excludePaths:
+        - bootstrap/cache
     paths:
         - app/
         - config
