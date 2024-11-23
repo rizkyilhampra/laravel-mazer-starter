@@ -29,6 +29,7 @@
         "overtrue/phplint": "^9.5",
         "pestphp/pest": "^3.5",
         "pestphp/pest-plugin-laravel": "^3.0",
+        "pestphp/pest-plugin-type-coverage": "^3.2",
         "tomasvotruba/bladestan": "^0.5.0",
         "wire-elements/wire-spy": "^0.0.9"
     },
