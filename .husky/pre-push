@@ -1,7 +1,11 @@
 if command -v docker &>/dev/null && docker info --format '{{.ServerVersion}}' &>/dev/null; then
     ./vendor/bin/sail bin phpstan analyse --memory-limit=1G --error-format=blade --ansi
-    ./vendor/bin/sail pest --parallel --colors always
+    ./vendor/bin/sail pest --filter=arch
+    ./vendor/bin/sail pest --type-coverage --min=100
+    ./vendor/bin/sail pest --parallel --coverage --colors always
 else
     ./vendor/bin/phpstan analyse --memory-limit=1G --error-format=blade --ansi
-    ./vendor/bin/pest --parallel --colors always
+    ./vendor/bin/pest --filter=arch
+    ./vendor/bin/pest --type-coverage --min=100
+    ./vendor/bin/pest --parallel --coverage --colors always
 fi
