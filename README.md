@@ -14,8 +14,11 @@ An Laravel starter kits with [Mazer](https://github.com/zuramai/mazer) as an adm
 -   Git Hooks for Linting, Formatting, and Testing with Husky
     - Syntax check through [phplint](https://github.com/overtrue/phplint/)
     - Code styles and standard through [pint](https://github.com/laravel/pint)
-    - Code quality check through [phpstan](https://github.com/phpstan/phpstan) and [bladestan](https://github.com/TomasVotruba/bladestan) (default: max ⚠️)
-    - Testing through [pest](https://pestphp.com)
+    - Code quality check through [phpstan](https://github.com/phpstan/phpstan) and [bladestan](https://github.com/TomasVotruba/bladestan) (default to max(9) ⚠️)
+    - Testing through [pest](https://pestphp.com). Include:
+        - Architecture test
+        - Type Coverage test (default to 100%)
+        - Unit test
 -   Docker through Sail (Optional by checking your system has docker or not)
 -   Bun as package manager by default. See [lockfile](./bun.lockb)
 
