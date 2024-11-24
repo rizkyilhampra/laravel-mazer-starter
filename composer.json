@@ -73,6 +73,14 @@
             "@test:arch",
             "@test:type-coverage",
             "@test:coverage"
+        ],
+        "sail-test:arch": "sail pest --filter=arch",
+        "sail-test:type-coverage": "sail pest --type-coverage --min=100",
+        "sail-test:coverage": "sail pest --parallel --coverage --min=100",
+        "sail-test": [
+            "@sail-test:arch",
+            "@sail-test:type-coverage",
+            "@sail-test:coverage"
         ]
     },
     "extra": {
