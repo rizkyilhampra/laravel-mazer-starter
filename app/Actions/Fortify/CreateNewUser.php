@@ -31,10 +31,12 @@ final class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'username' => ['required', 'string', 'max:255', Rule::unique(User::class)],
         ])->validate();
 
-        return User::create([
+        return User::query()->create([
             'name' => $input['name'],
+            'username' => $input['username'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
