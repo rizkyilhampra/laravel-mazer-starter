@@ -61,9 +61,13 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
+        "sail-dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "sail up -d && bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185\" \"sail logs --follow\" \"sail artisan pail --timeout=0\" \"sail bun run dev\" --names=server,logs,vite --teardown=\"sail down\""
+        ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "./dev.sh"
+            "bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185\" \"php artisan serve\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,logs,vite"
         ],
         "test:lint": "pint --test",
         "test:types": "phpstan analyse --memory-limit=1G --error-format=blade",
