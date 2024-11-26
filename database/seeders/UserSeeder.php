@@ -15,8 +15,6 @@ class UserSeeder extends Seeder
         $admin = $user->factory()->create([
             'name' => \Illuminate\Support\Str::ucfirst(RoleEnum::ADMIN->value),
             'email' => 'admin@example.com',
-            'username' => 'admin',
-
         ]);
 
         $role = app(Role::class)->findByName(RoleEnum::ADMIN->value);
