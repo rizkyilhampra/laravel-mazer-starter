@@ -11,15 +11,16 @@ An Laravel starter kits with [Mazer](https://github.com/zuramai/mazer) as an adm
 -   Vite (Hope [farmfe](https://farmfe.com) will be supported soon)
 -   Bootstrap through SAAS
 -   Livewire Volt Alpine.js
--   Git Hooks for Linting, Formatting, and Testing with Husky
-    - Code styles and standard through [pint](https://github.com/laravel/pint)
+-   Linting, Formatting, and Testing
+    - Code styles and standard check through [pint](https://github.com/laravel/pint)
     - Code quality check through [phpstan](https://github.com/phpstan/phpstan) and [bladestan](https://github.com/TomasVotruba/bladestan) (default to max)
     - Testing through [pest](https://pestphp.com). Include:
         - Architecture test
         - Type Coverage test (default to min 100%)
         - Unit test
--   Docker through Sail (Optional by checking your system has docker or not)
--   Bun as package manager by default. See [lockfile](./bun.lockb)
+-   Git Hooks through [husky](https://github.com/typicode/husky)
+-   Docker through Sail
+-   Bun as package manager by default
 
 ## Why?
 
