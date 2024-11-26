@@ -12,7 +12,6 @@ use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property string $id
- * @property string $username
  * @property string $name
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -65,7 +64,6 @@ final class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'username',
         'email',
         'password',
     ];

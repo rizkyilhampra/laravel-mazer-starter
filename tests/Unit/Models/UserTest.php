@@ -2,8 +2,12 @@
 
 use App\Enums\RoleEnum;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 use function Illuminate\Support\enum_value;
 
@@ -12,16 +16,19 @@ test('can create user with factory', function () {
 
     expect($user)
         ->toBeInstanceOf(User::class)
-        ->name->toBeString()
-        ->username->toBeString()
-        ->email->toBeString()
-        ->password->toBeString();
+        ->toHaveKeys([
+            'id',
+            'name',
+            'email',
+            'email_verified_at',
+            'created_at',
+            'updated_at',
+        ]);
 });
 
 test('fillable attributes are correctly set', function () {
     $userData = [
         'name' => 'John Doe',
-        'username' => 'johndoe',
         'email' => 'john@example.com',
         'password' => 'password123',
     ];
@@ -30,7 +37,6 @@ test('fillable attributes are correctly set', function () {
 
     expect($user)
         ->name->toBe($userData['name'])
-        ->username->toBe($userData['username'])
         ->email->toBe($userData['email']);
 
     expect(Hash::check('password123', $user->password))->toBeTrue();
@@ -67,12 +73,12 @@ test('password is automatically hashed when set', function () {
 });
 
 test('user model uses required traits', function () {
-    expect('App\Models\User')
+    expect(\App\Models\User::class)
         ->toUseTraits([
-            'Illuminate\Database\Eloquent\Factories\HasFactory',
-            'Spatie\Permission\Traits\HasRoles',
-            'Illuminate\Database\Eloquent\Concerns\HasUlids',
-            'Illuminate\Notifications\Notifiable',
+            HasFactory::class,
+            HasRoles::class,
+            HasUlids::class,
+            Notifiable::class,
         ]);
 });
 
@@ -86,8 +92,7 @@ test('user has valid ulid when created', function () {
 
 test('can assign and check roles', function () {
     $user = User::factory()->create();
-    $role = enum_value(RoleEnum::ADMIN);
-    $role = Role::findOrCreate($role);
+    $role = Role::findOrCreate(enum_value(RoleEnum::ADMIN));
 
     $user->assignRole($role);
 
@@ -97,7 +102,7 @@ test('can assign and check roles', function () {
 test('can receive notifications', function () {
     $user = User::factory()->create();
 
-    expect($user->notifications())->toBeObject();
+    expect($user->notifications())->not->toBeEmpty();
 });
 
 test('email must be unique', function () {
@@ -105,13 +110,5 @@ test('email must be unique', function () {
 
     expect(fn () => User::factory()->create([
         'email' => $userData['email'],
-    ]))->toThrow(Illuminate\Database\QueryException::class);
-});
-
-test('username must be unique', function () {
-    $userData = User::factory()->create()->toArray();
-
-    expect(fn () => User::factory()->create([
-        'username' => $userData['username'],
     ]))->toThrow(Illuminate\Database\QueryException::class);
 });
