@@ -1,6 +1,0 @@
-path:
-  - app
-  - routes
-  - database/factories
-  - config
-  - bootstrap
