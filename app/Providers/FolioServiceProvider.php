@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Enums\RoleEnum;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Folio\Folio;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 final class FolioServiceProvider extends ServiceProvider
 {
@@ -24,7 +26,7 @@ final class FolioServiceProvider extends ServiceProvider
     {
         Folio::path(resource_path('views/pages'))->middleware([
             '*' => [
-                //
+                'auth', RoleMiddleware::using(role: array_column(RoleEnum::cases(), 'value')),
             ],
         ]);
     }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\View\Components\Layouts;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -24,17 +22,11 @@ final class App extends Component
      */
     public function render(): View
     {
-        /** @var \App\Models\User|null $user */
+        /** @var \App\Models\User $user */
         $user = auth('web')->user();
 
-        if ($user === null) {
-            throw new AuthenticationException;
-        }
-
+        /** @var \Spatie\Permission\Models\Role $role */
         $role = $user->roles->first();
-        if ($role === null) {
-            throw new AuthorizationException;
-        }
 
         /** @var string $appName */
         $appName = config('app.name');
