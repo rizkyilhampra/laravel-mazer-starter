@@ -51,8 +51,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan ide-helper:generate"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -66,18 +65,26 @@
             "Composer\\Config::disableProcessTimeout",
             "./dev.sh"
         ],
+        "test:lint": "pint --test",
+        "test:types": "phpstan analyse --memory-limit=1G --error-format=blade",
         "test:arch": "pest --filter=arch",
         "test:type-coverage": "pest --type-coverage --min=100",
         "test:coverage": "pest --parallel --coverage --min=100",
         "test": [
+            "@test:lint",
+            "@test:types",
             "@test:arch",
             "@test:type-coverage",
             "@test:coverage"
         ],
-        "sail-test:arch": "sail pest --filter=arch",
-        "sail-test:type-coverage": "sail pest --type-coverage --min=100",
-        "sail-test:coverage": "sail pest --parallel --coverage --min=100",
+        "sail-test:lint": "sail bin pint --test --ansi",
+        "sail-test:types": "sail bin phpstan analyse --error-format=blade --ansi",
+        "sail-test:arch": "sail pest --filter=arch --colors=always",
+        "sail-test:type-coverage": "sail pest --type-coverage --min=100 --colors=always",
+        "sail-test:coverage": "sail pest --parallel --coverage --colors=always",
         "sail-test": [
+            "@sail-test:lint",
+            "@sail-test:types",
             "@sail-test:arch",
             "@sail-test:type-coverage",
             "@sail-test:coverage"
