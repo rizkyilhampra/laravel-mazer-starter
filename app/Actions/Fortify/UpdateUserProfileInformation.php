@@ -34,20 +34,4 @@ final class UpdateUserProfileInformation implements UpdatesUserProfileInformatio
             'email' => $input['email'],
         ])->save();
     }
-
-    /**
-     * Update the given verified user's profile information.
-     *
-     * @param  array<string, string>  $input
-     */
-    protected function updateVerifiedUser(User $user, array $input): void
-    {
-        $user->forceFill([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'email_verified_at' => null,
-        ])->save();
-
-        $user->sendEmailVerificationNotification();
-    }
 }
