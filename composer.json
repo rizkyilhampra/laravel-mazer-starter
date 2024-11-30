@@ -83,7 +83,7 @@
         "sail-test:types": "sail bin phpstan analyse --error-format=blade --ansi",
         "sail-test:arch": "sail pest --filter=arch --colors=always",
         "sail-test:type-coverage": "sail pest --type-coverage --min=100 --colors=always",
-        "sail-test:coverage": "sail pest --parallel --coverage --colors=always",
+        "sail-test:coverage": "sail pest --parallel --min=100 --coverage --colors=always",
         "sail-test": [
             "@sail-test:lint",
             "@sail-test:types",
