@@ -14,14 +14,14 @@ it('CreateNewUser creates a user', function () {
         'password_confirmation' => 'password123',
     ];
 
-    $createNewUser = new \App\Actions\Fortify\CreateNewUser;
+    $createNewUser = new App\Actions\Fortify\CreateNewUser;
     $user = $createNewUser->create($input);
 
-    expect($user)->toBeInstanceOf(\App\Models\User::class);
+    expect($user)->toBeInstanceOf(App\Models\User::class);
 });
 
 it('UpdateUserPassword updates password', function () {
-    $user = \App\Models\User::factory()->create([
+    $user = App\Models\User::factory()->create([
         'password' => bcrypt('oldpassword'),
     ]);
 
@@ -33,28 +33,28 @@ it('UpdateUserPassword updates password', function () {
         'password_confirmation' => 'newpassword',
     ];
 
-    $updateUserPassword = new \App\Actions\Fortify\UpdateUserPassword;
+    $updateUserPassword = new App\Actions\Fortify\UpdateUserPassword;
     $updateUserPassword->update($user, $input);
 
     expect(Hash::check('newpassword', $user->password))->toBeTrue();
 });
 
 it('ResetUserPassword resets password', function () {
-    $user = \App\Models\User::factory()->create();
+    $user = App\Models\User::factory()->create();
 
     $input = [
         'password' => 'newpassword',
         'password_confirmation' => 'newpassword',
     ];
 
-    $resetUserPassword = new \App\Actions\Fortify\ResetUserPassword;
+    $resetUserPassword = new App\Actions\Fortify\ResetUserPassword;
     $resetUserPassword->reset($user, $input);
 
     expect(Hash::check('newpassword', $user->password))->toBeTrue();
 });
 
 it('UpdateUserProfileInformation updates profile', function () {
-    $user = \App\Models\User::factory()->create([
+    $user = App\Models\User::factory()->create([
         'name' => 'Rizky Ilham',
         'email' => 'rizkyilham@example.com',
     ]);
@@ -66,7 +66,7 @@ it('UpdateUserProfileInformation updates profile', function () {
         'email' => 'rizkyilhampra@example.com',
     ];
 
-    $updateProfile = new \App\Actions\Fortify\UpdateUserProfileInformation;
+    $updateProfile = new App\Actions\Fortify\UpdateUserProfileInformation;
     $updateProfile->update($user, $input);
 
     expect($user->name)->toBe('Rizky Ilham Pratama');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Enums\RoleEnum;
 use Database\Seeders\RoleSeeder;
 
@@ -17,7 +19,7 @@ it('guests cannot access the home page', function () {
 
 it('user with role admin can access the home page', function () {
     seed(RoleSeeder::class);
-    $user = \App\Models\User::factory()->create();
+    $user = App\Models\User::factory()->create();
     $user->assignRole(enum_value(RoleEnum::ADMIN));
 
     actingAs($user);
@@ -29,7 +31,7 @@ it('user with role admin can access the home page', function () {
 
 it('user with role employe can access the home page', function () {
     seed(RoleSeeder::class);
-    $user = \App\Models\User::factory()->create();
+    $user = App\Models\User::factory()->create();
     $user->assignRole(enum_value(RoleEnum::EMPLOYE));
 
     actingAs($user);
@@ -40,7 +42,7 @@ it('user with role employe can access the home page', function () {
 });
 
 it('user without any roles cannot access the home page', function () {
-    $user = \App\Models\User::factory()->create();
+    $user = App\Models\User::factory()->create();
 
     actingAs($user);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -73,7 +75,7 @@ test('password is automatically hashed when set', function () {
 });
 
 test('user model uses required traits', function () {
-    expect(\App\Models\User::class)
+    expect(User::class)
         ->toUseTraits([
             HasFactory::class,
             HasRoles::class,

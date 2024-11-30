@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Enums\RoleEnum;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
-class UserSeeder extends Seeder
+final class UserSeeder extends Seeder
 {
     public function run(): void
     {

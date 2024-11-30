@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Enums\RoleEnum;
 
 it('can get label for admin role', function () {
